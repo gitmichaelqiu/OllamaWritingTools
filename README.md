@@ -18,7 +18,6 @@ Ollama Writing Tools is a lightweight Windows application that seamlessly integr
 
 ## ✨ Key Features
 
-<<<<<<< HEAD
 - **Instant Access**: Select text anywhere and press Ctrl+C to activate
 - **Smart UI**: Floating button appears near your cursor for quick access
 - **System Integration**: 
@@ -33,24 +32,21 @@ Ollama Writing Tools is a lightweight Windows application that seamlessly integr
   - Choose your preferred Ollama model
   - Configure API settings
   - Adjust font size
-=======
+
 - **System Tray Integration**: Seamlessly runs in the background
 - **Text Selection Monitoring**: Activates upon text selection
 - **Customizable Writing Tools Options**: Configure in `functions.json`
 - **Configurable API Settings**: Customize your Ollama API URL and model selection
->>>>>>> e1c4d1710f17e512d5985ee9a54a8b15119d240c
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-<<<<<<< HEAD
 1. **Ollama**: Install [Ollama](https://ollama.com) on your system
 2. **AI Model**: Pull your preferred model (recommended: qwen2.5:3b)
 =======
 1. Install [Ollama](https://ollama.com)
 2. Pull at least one Ollama model (e.g., qwen2.5:3b):
->>>>>>> e1c4d1710f17e512d5985ee9a54a8b15119d240c
    ```bash
    ollama pull qwen2.5:3b
    ```
@@ -101,7 +97,6 @@ Ollama Writing Tools is a lightweight Windows application that seamlessly integr
 
 ## 📁 Project Structure
 
-<<<<<<< HEAD
 ```
 OllamaWritingTools/
 ├── resources/
@@ -112,7 +107,7 @@ OllamaWritingTools/
 ├── requirements.txt     # Python dependencies
 └── README.md           # This file
 ```
-=======
+
 ### Customize Writing Tools Grammar
 
 ```json
@@ -124,9 +119,6 @@ OllamaWritingTools/
    "icon": "ADD AN EMOJI HERE"
 },
 ```
-
-## ⚠️ Note
->>>>>>> e1c4d1710f17e512d5985ee9a54a8b15119d240c
 
 ## 🤝 Contributing
 
