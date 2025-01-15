@@ -1,0 +1,53 @@
+{
+    "functions": [
+        {
+            "name": "Fix Grammar and Spelling",
+            "description": "Check grammar and spelling errors",
+            "prompt": "Act as a spelling corrector and improver. (replyWithRewrittenText)\n\nStrictly follow these rules:\n- Correct spelling, grammar and punctuation\n- (maintainOriginalLanguage)\n- NEVER surround the rewritten text with quotes\n- (maintainURLs)\n- Don't change emojis\n\nText: {selection}\n\nFixed Text:",
+            "temperature": 0.2,
+            "icon": "🔍"
+        },
+        {
+            "name": "Improve Writing",
+            "description": "Enhance writing style and clarity",
+            "prompt": "Act as a spelling corrector, content writer, and text improver/editor. Reply to each message only with the rewritten text\nStrictly follow these rules:\n- Correct spelling, grammar, and punctuation errors in the given text\n- Enhance clarity and conciseness without altering the original meaning\n- Divide lengthy sentences into shorter, more readable ones\n- Eliminate unnecessary repetition while preserving important points\n- Prioritize active voice over passive voice for a more engaging tone\n- Opt for simpler, more accessible vocabulary when possible\n- ALWAYS ensure the original meaning and intention of the given text\n- (maintainOriginalLanguage)\n- ALWAYS maintain the existing tone of voice and style, e.g. formal, casual, polite, etc.\n- NEVER surround the improved text with quotes or any additional formatting\n- If the text is already well-written and requires no improvement, don't change the given text\n\nText: {selection}\n\nImproved Text:",
+            "temperature": 0.2,
+            "icon": "✏️"
+        },
+        {
+            "name": "Make Longer",
+            "description": "Make the text longer",
+            "prompt": "Act as a professional content writer tasked with expanding a client's text while maintaining its essence and style. (replyWithRewrittenText)\n\nStrictly follow these rules:\n- ALWAYS preserve the original tone, voice, and language of the text\n- Identify and expand the most critical information and key points\n- Avoid repetition\n- Stay factual close to the provided text\n- Keep URLs in their original format without replacing them with markdown links\n- Only reply with the expanded text\n\nText: {selection}\n\nExpanded text:",
+            "temperature": 0.7,
+            "icon": "📈"
+        },
+        {
+            "name": "Make Shorter",
+            "description": "Make the text shorter", 
+            "prompt": "Act as a professional content writer tasked with shortening a client's text while maintaining its essence and style. (replyWithRewrittenText)\n\nStrictly follow these rules:\n- ALWAYS preserve the original tone, voice, and language of the text\n- Identify and retain the most critical information and key points\n- Eliminate redundancies and repetitive phrases or sentences\n- Keep URLs in their original format without replacing them with markdown links\n- Ensure the shortened text flows smoothly and maintains coherence\n- Aim to reduce the word count as much as possible without compromising the core meaning and style\n- Only reply with the shortened text\n\nText: {selection}\n\nShortened text:",
+            "temperature": 0.2,
+            "icon": "✂️"
+        },
+        {
+            "name": "Change Tone to Professional",
+            "description": "Change the tone of the text to professional",
+            "prompt": "Act as a professional content writer and editor. (replyWithRewrittenText)\n\nStrictly follow these rules:\n- Professional tone of voice\n- Formal language\n- Accurate facts\n- Correct spelling, grammar, and punctuation\n- Concise phrasing\n- Meaning unchanged\n- Length retained\n- (maintainURLs)\n- (maintainOriginalLanguage)\n\nText: {selection}\n\nRewritten text:",
+            "temperature": 0.2,
+            "icon": "🏢"
+        },
+        {
+            "name": "Change Tone to Friendly",
+            "description": "Change the tone of the text to friendly",
+            "prompt": "Act as a content writer and editor. (replyWithRewrittenText)\n\nStrictly follow these rules:\n- Friendly and optimistic tone of voice\n- Correct spelling, grammar, and punctuation\n- Meaning unchanged\n- Length retained\n- (maintainURLs)\n- (maintainOriginalLanguage)\n\nText: {selection}\n\nRewritten text:",
+            "temperature": 0.2,
+            "icon": "😊"
+        },
+        {
+            "name": "Summarize",
+            "description": "Summarize the text",
+            "prompt": "Please summarize the following text while keeping the main points, following the format \"## [Title] \n ### Summary \n [The Summary] \n ### Key takeaways \n - [Point 1] \n - [Point 2] \n - [Point n]\", you need to replace the content of the summary and key takeaways with the content of the text, and replace the title with the title of the text:\n\n{selection}",
+            "temperature": 0.2,
+            "icon": "📝"
+        }
+    ]
+} 
