@@ -1,6 +1,7 @@
 import sys
 import json
 import requests
+import os
 from PyQt5.QtWidgets import (QApplication, QSystemTrayIcon, QMenu, 
                             QDialog, QVBoxLayout, QLabel, QLineEdit,
                             QComboBox, QPushButton, QWidget, QTextEdit,
@@ -10,12 +11,24 @@ from PyQt5.QtGui import QIcon, QCursor
 import keyboard
 import time
 
+def get_resource_path(relative_path):
+    """Get absolute path to resource, works for dev and for PyInstaller"""
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowFlags(Qt.Tool)  # Hide from taskbar
         self.hide()  # Keep window hidden
         self.writing_tools_windows = []  # Keep track of all writing tools windows
+        # Set application icon
+        icon_path = get_resource_path("resources/icon.png")
+        self.setWindowIcon(QIcon(icon_path))
         
     def closeEvent(self, event):
         # Prevent the window from being closed
@@ -25,6 +38,12 @@ class MainWindow(QMainWindow):
 class MainApplication(QApplication):
     def __init__(self, argv):
         super().__init__(argv)
+        # Set application metadata for proper taskbar grouping
+        self.setApplicationName("OllamaWritingTools")
+        self.setApplicationDisplayName("Ollama Writing Tools")
+        self.setOrganizationName("OllamaWritingTools")
+        self.setWindowIcon(QIcon(get_resource_path("resources/icon.png")))
+        
         self.main_window = MainWindow()
         self.floating_button = None
         self.init_ui()
@@ -33,7 +52,8 @@ class MainApplication(QApplication):
     def init_ui(self):
         # Create system tray icon
         self.tray = QSystemTrayIcon()
-        self.tray.setIcon(QIcon("icon.png"))
+        icon_path = get_resource_path("resources/icon.png")
+        self.tray.setIcon(QIcon(icon_path))
         
         # Create tray menu
         menu = QMenu()
@@ -87,8 +107,7 @@ class MainApplication(QApplication):
         
     def create_writing_tools_window(self, text):
         # Create new writing tools window
-        window = WritingToolsWindow(text, self.main_window)
-        self.main_window.writing_tools_windows.append(window)
+        window = WritingToolsWindow(text)  # No parent
         window.show()
         return window
 
@@ -202,20 +221,59 @@ class FloatingButton(QWidget):
 
 class WritingToolsWindow(QDialog):
     def __init__(self, text, parent=None):
-        super().__init__(parent)
+        super().__init__(None)  # Remove parent to make it a top-level window
         self.setWindowTitle("Ollama Writing Tools")
-        # Remove the help button from the title bar
-        self.setWindowFlags(self.windowFlags() & ~Qt.WindowContextHelpButtonHint)
+        
+        # Set proper window flags for taskbar integration
+        self.setWindowFlags(
+            Qt.Window |  # Make it a window
+            Qt.WindowSystemMenuHint |  # Add system menu
+            Qt.WindowMinMaxButtonsHint |  # Add min/max buttons
+            Qt.WindowCloseButtonHint  # Add close button
+        )
+        self.setAttribute(Qt.WA_DeleteOnClose)  # Clean up when closed
+        
+        # Set window icon
+        icon_path = get_resource_path("resources/icon.png")
+        self.setWindowIcon(QIcon(icon_path))
+        
         self.text = text
         self.functions = self.load_functions()
         self.setup_ui()
         self.setMinimumWidth(500)
         self.setMinimumHeight(400)
-        self.setWindowModality(Qt.NonModal)
+        
+        # Center the window on screen
+        self.center_on_screen()
+        
+        # Ensure window is properly shown and activated
+        self.show()
+        self.raise_()
+        self.activateWindow()
+        
+    def center_on_screen(self):
+        # Get the screen geometry
+        screen = QApplication.primaryScreen().geometry()
+        # Calculate the center position
+        center_x = (screen.width() - self.width()) // 2
+        center_y = (screen.height() - self.height()) // 2
+        # Move the window
+        self.move(center_x, center_y)
+        
+    def closeEvent(self, event):
+        # Actually close the window instead of hiding it
+        event.accept()
+        
+    def showEvent(self, event):
+        super().showEvent(event)
+        # Ensure window is activated when shown
+        self.activateWindow()
+        self.raise_()
         
     def load_functions(self):
         try:
-            with open('functions.json', 'r', encoding='utf-8') as f:
+            functions_path = get_resource_path("resources/functions.json")
+            with open(functions_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 return data.get('functions', [])
         except Exception as e:
@@ -390,11 +448,6 @@ class WritingToolsWindow(QDialog):
             for button in self.findChildren(QPushButton):
                 button.setEnabled(True)
 
-    def closeEvent(self, event):
-        # Hide the window instead of closing it
-        event.ignore()
-        self.hide()
-
 class SettingsDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -475,7 +528,8 @@ class Settings:
     @staticmethod
     def get_api_url():
         try:
-            with open('settings.json', 'r') as f:
+            settings_path = get_resource_path("resources/settings.json")
+            with open(settings_path, 'r') as f:
                 settings = json.load(f)
                 return settings.get('api_url', '127.0.0.1:11434')
         except:
@@ -484,7 +538,8 @@ class Settings:
     @staticmethod
     def get_selected_model():
         try:
-            with open('settings.json', 'r') as f:
+            settings_path = get_resource_path("resources/settings.json")
+            with open(settings_path, 'r') as f:
                 settings = json.load(f)
                 return settings.get('model', 'llama2')
         except:
@@ -493,7 +548,8 @@ class Settings:
     @staticmethod
     def get_font_size():
         try:
-            with open('settings.json', 'r') as f:
+            settings_path = get_resource_path("resources/settings.json")
+            with open(settings_path, 'r') as f:
                 settings = json.load(f)
                 return settings.get('font_size', 12)
         except:
@@ -502,39 +558,48 @@ class Settings:
     @staticmethod
     def save_api_url(url):
         try:
-            with open('settings.json', 'r') as f:
+            settings_path = get_resource_path("resources/settings.json")
+            with open(settings_path, 'r') as f:
                 settings = json.load(f)
         except:
             settings = {}
         settings['api_url'] = url
-        with open('settings.json', 'w') as f:
+        with open(settings_path, 'w') as f:
             json.dump(settings, f)
     
     @staticmethod
     def save_selected_model(model):
         try:
-            with open('settings.json', 'r') as f:
+            settings_path = get_resource_path("resources/settings.json")
+            with open(settings_path, 'r') as f:
                 settings = json.load(f)
         except:
             settings = {}
         settings['model'] = model
-        with open('settings.json', 'w') as f:
+        with open(settings_path, 'w') as f:
             json.dump(settings, f)
             
     @staticmethod
     def save_font_size(size):
         try:
-            with open('settings.json', 'r') as f:
+            settings_path = get_resource_path("resources/settings.json")
+            with open(settings_path, 'r') as f:
                 settings = json.load(f)
         except:
             settings = {}
         settings['font_size'] = size
-        with open('settings.json', 'w') as f:
+        with open(settings_path, 'w') as f:
             json.dump(settings, f)
 
 def main():
+    # Set app ID for Windows taskbar grouping
+    try:
+        from ctypes import windll
+        windll.shell32.SetCurrentProcessExplicitAppUserModelID("OllamaWritingTools")
+    except:
+        pass
+        
     app = MainApplication(sys.argv)
-    # This ensures the app stays running
     sys.exit(app.exec_())
 
 if __name__ == '__main__':

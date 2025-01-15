@@ -2,9 +2,9 @@
 
 <div align="center">
 
-![Ollama Writing Tools Logo](./icon.png)
+![Ollama Writing Tools Logo](resources/icon.png)
 
-An AI-powered Windows application that provides writing assistance through Ollama AI. This tool activates when you select text, offering various writing enhancement features such as proofreading.
+A Windows application that enhances your writing with AI-powered assistance through Ollama. Simply select text anywhere, and get instant writing improvements with a single click.
 
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/gitmichaelqiu/OllamaWritingTools/blob/main/LICENSE)
 [![Powered by Ollama](https://img.shields.io/badge/Powered%20by-Ollama-orange)](https://ollama.com)
@@ -14,56 +14,92 @@ An AI-powered Windows application that provides writing assistance through Ollam
 
 ## 🎯 Overview
 
-Ollama Writing Tools enhances your writing experience by providing real-time assistance powered by advanced AI models. It simplifies the process of improving your text with just a few clicks.
+Ollama Writing Tools is a lightweight Windows application that seamlessly integrates with your workflow to provide instant writing assistance. Using the power of Ollama's AI models, it helps improve your writing with just a few clicks.
 
 ## ✨ Key Features
 
-- **System Tray Integration**: Seamlessly runs in the background
-- **Text Selection Monitoring**: Activates upon text selection
-- **Proofreading Functionality**: Offers grammar and spelling corrections
-- **Configurable API Settings**: Customize your Ollama API URL and model selection
+- **Instant Access**: Select text anywhere and press Ctrl+C to activate
+- **Smart UI**: Floating button appears near your cursor for quick access
+- **System Integration**: 
+  - Runs quietly in the system tray
+  - Proper taskbar integration with application icon
+  - Windows native look and feel
+- **Writing Tools**:
+  - Proofreading and grammar checking
+  - Style improvements
+  - More features coming soon
+- **Customizable**:
+  - Choose your preferred Ollama model
+  - Configure API settings
+  - Adjust font size
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
 ### Prerequisites
 
-1. Install [Ollama](https://ollama.com) and ensure it is running on `127.0.0.1:11434`
-2. Pull at least one Ollama model (e.g., qwen2.5:3b):
+1. **Ollama**: Install [Ollama](https://ollama.com) on your system
+2. **AI Model**: Pull your preferred model (recommended: qwen2.5:3b)
    ```bash
    ollama pull qwen2.5:3b
    ```
 
 ### Installation
 
-1. Clone this repository
-2. Install the required dependencies:
+#### Option 1: Download Executable (Recommended)
+1. Download the latest release from the [releases page](https://github.com/gitmichaelqiu/OllamaWritingTools/releases)
+2. Extract the zip file
+3. Run `OllamaWritingTools.exe`
+
+#### Option 2: Run from Source
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/gitmichaelqiu/OllamaWritingTools.git
+   ```
+2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-
-## 📖 Usage Guide
-
-### Basic Operation
-
-1. Run the application:
+3. Run the application:
    ```bash
    python main.py
    ```
-2. The application will run in the system tray (look for the icon in the bottom right corner of your screen).
-3. To use the writing tools:
+
+## 📖 How to Use
+
+1. **Start the App**: 
+   - Run `OllamaWritingTools.exe`
+   - Look for the icon in your system tray
+
+2. **Using the Writing Tools**:
    - Select any text in any application
-   - Press Ctrl+C to copy the text
-   - A small button will appear near your cursor
-   - Click the button to open the writing tools interface
-   - Choose the desired writing enhancement option (currently supports proofreading)
+   - Press Ctrl+C
+   - Click the floating button that appears
+   - Choose your desired writing enhancement
+   - View the improved text
+   - Copy or replace the original text with one click
 
-### Configuration
+3. **Configuration**:
+   - Right-click the system tray icon
+   - Select "Settings"
+   - Configure:
+     - Ollama API URL (default: 127.0.0.1:11434)
+     - AI Model selection
+     - Font size
+   - Click "Refresh Models" to update the model list
 
-Right-click the system tray icon and select "Settings" to:
-- Configure the Ollama API URL (default: 127.0.0.1:11434)
-- Select which Ollama model to use
-- Refresh the list of available models
+## 📁 Project Structure
 
-## ⚠️ Note
+```
+OllamaWritingTools/
+├── resources/
+│   ├── icon.png          # Application icon
+│   ├── functions.json    # Writing tool definitions
+│   └── settings.json     # User settings
+├── main.py              # Main application code
+├── requirements.txt     # Python dependencies
+└── README.md           # This file
+```
 
-Make sure to add an `icon.png` file in the same directory as `main.py` for the system tray icon.
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit pull requests.
