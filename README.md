@@ -20,14 +20,14 @@ Ollama Writing Tools enhances your writing experience by providing real-time ass
 
 - **System Tray Integration**: Seamlessly runs in the background
 - **Text Selection Monitoring**: Activates upon text selection
-- **Proofreading Functionality**: Offers grammar and spelling corrections
+- **Customizable Writing Tools Options**: Configure in `functions.json`
 - **Configurable API Settings**: Customize your Ollama API URL and model selection
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-1. Install [Ollama](https://ollama.com) and ensure it is running on `127.0.0.1:11434`
+1. Install [Ollama](https://ollama.com)
 2. Pull at least one Ollama model (e.g., qwen2.5:3b):
    ```bash
    ollama pull qwen2.5:3b
@@ -63,6 +63,18 @@ Right-click the system tray icon and select "Settings" to:
 - Configure the Ollama API URL (default: 127.0.0.1:11434)
 - Select which Ollama model to use
 - Refresh the list of available models
+
+### Customize Writing Tools Grammar
+
+```json
+{
+   "name": "NAME",
+   "description": "DESCRIPTION",
+   "prompt": "use placeholder {selection} for the selected text",
+   "temperature": 0.2,
+   "icon": "ADD AN EMOJI HERE"
+},
+```
 
 ## ⚠️ Note
 
