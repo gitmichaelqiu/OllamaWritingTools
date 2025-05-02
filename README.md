@@ -12,6 +12,8 @@ A Windows application that enhances your writing with AI-powered assistance thro
 
 </div>
 
+![F4A63B1E-D3E5-4F78-95C4-60AB86DC7135_1_105_c](https://github.com/user-attachments/assets/0f258580-68e2-4cca-9f35-9f25b31c7ebc)
+
 ## 🎯 Overview
 
 Ollama Writing Tools is a lightweight Windows application that seamlessly integrates with your workflow to provide instant writing assistance. Using the power of Ollama's AI models, it helps improve your writing with just a few clicks.
