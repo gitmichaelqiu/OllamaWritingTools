@@ -12,7 +12,9 @@ A Windows application that enhances your writing with AI-powered assistance thro
 
 </div>
 
-![F4A63B1E-D3E5-4F78-95C4-60AB86DC7135_1_105_c](https://github.com/user-attachments/assets/0f258580-68e2-4cca-9f35-9f25b31c7ebc)
+
+https://github.com/user-attachments/assets/219ce002-d570-40a5-9493-bb0eb58c390f
+
 
 ## 🎯 Overview
 
